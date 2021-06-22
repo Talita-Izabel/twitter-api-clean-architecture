@@ -12,7 +12,7 @@ export class User{
 
   constructor(name:string, email: string, password:string, id?:string ){
   //constructor(props: Omit<User, 'tweets'>){
-    ExceptionHandler.throwWhen(!id, new Error('ID is required.'));
+    //ExceptionHandler.throwWhen(!id, new Error('ID is required.'));
     ExceptionHandler.throwWhen(!name, new Error('Name cannot be empty.'));
     ExceptionHandler.throwWhen(!email, new Error('Email cannot be empty.'));
     ExceptionHandler.throwWhen(!password || password.length < 6, new Error("Invalid password."));
@@ -35,8 +35,12 @@ export class User{
     return this.id;
   }*/
 
-  login(email:string, password: string){
-     
+  async login(email:string, password: string){
+     const isValidPassword = await bcrypt.compare(password, this.password);
+     if(!isValidPassword)
+      throw new Error("Invalid password");
+
+    return this.id;
   }
 
   twettar(){}

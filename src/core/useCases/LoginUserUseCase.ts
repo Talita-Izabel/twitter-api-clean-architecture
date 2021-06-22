@@ -13,11 +13,11 @@ export class LoginUserUseCase{
   }
 
   async execute({email, password}: ILoginExecuteData){
-    const userValid = await this.usersRepository.findByEmail(email);
+    const isValidUser = await this.usersRepository.findByEmail(email);
 
-    if(!userValid)
+    if(!isValidUser)
       throw new Error("User not found.");
 
-    await userValid.login(email, password);
+    await isValidUser.login(email, password);
   }
 }

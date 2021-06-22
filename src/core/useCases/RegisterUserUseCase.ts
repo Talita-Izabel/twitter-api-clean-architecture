@@ -17,12 +17,13 @@ export class RegisterUserUseCase{
   async execute({name, email, password}: IRegisterExecuteData)  {
     const userExists = await this.usersRepository.findByEmail(email);
 
-    if(userExists)
+    if(userExists){
       throw new Error('User exists.');
+    }
 
     const user = new User(name, email, password);
 
     await this.usersRepository.save(user);
-
+    return user;
   }
 }
