@@ -19,5 +19,7 @@ export class LoginUserUseCase{
       throw new Error("User not found.");
 
     await isValidUser.login(email, password);
+
+    return isValidUser.id;
   }
 }
