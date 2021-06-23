@@ -8,7 +8,6 @@ export class User{
   name: string;
   email: string;
   password: string;
-  tweets: Tweet[];
 
   constructor(name:string, email: string, password:string, id?:string ){
   //constructor(props: Omit<User, 'tweets'>){
@@ -20,8 +19,8 @@ export class User{
     this.id = uuid();
     this.name = name;
     this.email = email;
-    const hash = bcrypt.hashSync(password, 10) ;
-    this.password = hash;
+    //const hash = bcrypt.hashSync(password, 10) ;
+    this.password = password;
   
   }
 
