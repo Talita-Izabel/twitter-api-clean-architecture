@@ -1,3 +1,4 @@
+import { IUser } from "../../infra/repositories/protocols/IUser";
 import { IUsersRepository } from "../repositories/IUserRepository";
 
 interface ILoginExecuteData{
@@ -6,9 +7,9 @@ interface ILoginExecuteData{
 }
 
 export class LoginUserUseCase{
-  usersRepository: IUsersRepository;
+  usersRepository: IUsersRepository<IUser>;
 
-  constructor(usersRepository: IUsersRepository){
+  constructor(usersRepository: IUsersRepository<IUser>){
     this.usersRepository = usersRepository;
   }
 

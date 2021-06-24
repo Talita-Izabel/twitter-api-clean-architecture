@@ -1,25 +1,29 @@
 import { ExceptionHandler } from '../exception/ExceptionHandler'
-import { TweetReplies } from './TweetReplies';
+import { TweetMessage } from './TweetMessage';
 import { User } from './User';
-import { v4 as uuid } from 'uuid';
 
 export class Tweet{
   id: string;
   text: string;
-  //reply: string[];  
   user: User;
-  //reply: TweetReplies[];
-  replies: TweetReplies[];
+  comments: TweetMessage[];
   date: Date;
 
-  constructor(id:string, text:string, date:Date, replies?:TweetReplies[]){
+  constructor(id:string, text:string, date:Date, comments?:TweetMessage[]){
     ExceptionHandler.throwWhen(!text || text.length > 180, new Error('Tweet cannot be empty or be longer than 180 characters.'))
-    //ExceptionHandler.throwWhen(!date, new Error('Date is required!'))
+    ExceptionHandler.throwWhen(!id, new Error('ID is required!'))
 
-    this.id = uuid();
+    this.id = id;
     this.text = text;
-    this.replies = replies;
-    this.date = new Date();
+    this.comments = comments;
+    this.date = date;
+    //this.date = new Date();
     
   }
+
+  addMessage( comment: TweetMessage ){};
+
+  removeMessage(id : User){};
+
+  editMessage(id: User, { text }: TweetMessage ){}
 }

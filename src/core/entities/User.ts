@@ -1,6 +1,5 @@
 import { ExceptionHandler } from "../exception/ExceptionHandler";
-import {Tweet} from "./Tweet";
-import { v4 as uuid } from "uuid";
+//import { v4 as uuid } from "uuid";
 import bcrypt from "bcrypt";
 
 export class User{
@@ -16,7 +15,7 @@ export class User{
     ExceptionHandler.throwWhen(!email, new Error('Email cannot be empty.'));
     ExceptionHandler.throwWhen(!password || password.length < 6, new Error("Invalid password."));
 
-    this.id = uuid();
+    this.id = id;
     this.name = name;
     this.email = email;
     //const hash = bcrypt.hashSync(password, 10) ;

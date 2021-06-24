@@ -1,6 +1,7 @@
 import { IUser } from "../../infra/repositories/protocols/IUser";
 import { User } from "../entities/User";
 import { IEncrypter } from "../protocols/IEncrypter";
+import { IUuid } from "../protocols/IUuid";
 import { IUsersRepository } from "../repositories/IUserRepository";
 
 interface IRegisterExecuteData{
@@ -12,10 +13,12 @@ interface IRegisterExecuteData{
 export class RegisterUserUseCase{
   usersRepository: IUsersRepository<IUser>;
   encrypter: IEncrypter;
+  generator: IUuid;
 
-  constructor(usersRepository: IUsersRepository<IUser>, encrypter: IEncrypter ){
+  constructor(usersRepository: IUsersRepository<IUser>, encrypter: IEncrypter, generator: IUuid ){
     this.usersRepository = usersRepository;
     this.encrypter = encrypter;
+    this.generator = generator;
   }
 
   async execute({name, email, password}: IRegisterExecuteData)  {
@@ -25,8 +28,8 @@ export class RegisterUserUseCase{
       throw new Error('User exists.');
     }
 
-    
-    const user = new User(name, email, password);
+    const id = this.generator.idGenerator()
+    const user = new User(name, email, password, id);
     user.password = this.encrypter.encrypt(password);
     
     await this.usersRepository.save(user);
