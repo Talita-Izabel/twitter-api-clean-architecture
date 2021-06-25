@@ -1,5 +1,3 @@
-import { User } from "../core/entities/User";
-import { IUsersRepository } from "../core/repositories/IUserRepository";
 import { RegisterUserUseCase } from "../core/useCases/RegisterUserUseCase";
 import { BcryptEncrypterAdapter } from "../infra/adapter/BcryptEncrypterAdapter";
 import { UUIDGeneratorAdapter } from '../infra/adapter/UUIDGeneratorAdapter';

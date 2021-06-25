@@ -1,7 +1,6 @@
-//import { ITweet } from "../../infra/repositories/protocols/ITweet";
-import { TweetMessage } from "../entities/TweetMessage";
-import { User } from "../entities/User";
+import { ITweet } from "../../infra/repositories/protocols/ITweet";
 
-export interface ITweetRepository{
-  addMessage(comment: TweetMessage): Promise<User>;
+export interface ITweetRepository<T extends ITweet>{
+  findById(tweetId: string): Promise<T>;
+  save(tweet: T): Promise<void>;
 }

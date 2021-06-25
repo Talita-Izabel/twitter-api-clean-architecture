@@ -3,18 +3,20 @@ import { User } from "./User";
 
 export class TweetMessage{
   id: string;
+  tweetId: string;
   text: string;
-  user: User;
+  userId: string;
   date: Date;
-  //comments: TweetReplies[];
+  //user: User;
 
-  constructor(id:string, text:string, user:User, date:Date){
-    ExceptionHandler.throwWhen(!id, new Error('ID is required!'));
+  constructor(id:string, tweetId:string, text:string, userId:string, date:Date){
+    //ExceptionHandler.throwWhen(!id, new Error('ID is required!'));
     ExceptionHandler.throwWhen(!date, new Error('Date is required!'));
 
     this.id = id;
+    this.tweetId =  tweetId;
     this.text = text;
-    this.user = user;
+    this.userId = userId;
     this.date = date;
   }
 
