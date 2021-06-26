@@ -21,9 +21,9 @@ export class Tweet{
   }
 
 
-  addComments(tweetId:string, text: string){}
+  /*addComments(tweetId:string, text: string){}
 
   removeComment(commentId:string){}
 
-  editComment(commentId:string, text: string){}
+  editComment(commentId:string, text: string){}*/
 }

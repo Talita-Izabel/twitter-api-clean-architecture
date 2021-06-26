@@ -1,6 +1,6 @@
 import { ITweetMessage } from "./protocols/ITweetMessage";
 
-const tweetsMessage:ITweetMessage[] = [];
+let tweetsMessage:ITweetMessage[] = [];
 
 export class TweetMessageMemoryRepository{
   
@@ -16,7 +16,21 @@ export class TweetMessageMemoryRepository{
   async saveMessage( tweetMessage: ITweetMessage ):Promise<void>{
     tweetsMessage.push(tweetMessage);
     tweetsMessage.forEach(value => {
-      console.log("Tweet Message: ", value.id);
+      console.log("Tweet Message: ", value.text);
+    })
+  }
+
+  async deleteComment( tweetComment: ITweetMessage):Promise<void>{
+    tweetsMessage = tweetsMessage.filter( tweet => {
+      return tweet.id !== tweetComment.id;
+    })
+  }
+
+  async alterComment( tweetComment: ITweetMessage, text: string  ): Promise<void>{
+    tweetsMessage.forEach(value => {
+      if(value.id === tweetComment.id){
+        value.text = text;
+      }
     })
   }
 }

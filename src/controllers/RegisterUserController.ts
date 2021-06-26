@@ -11,7 +11,6 @@ export class RegisterUserController{
     const generator = new UUIDGeneratorAdapter();
     const useCase = new RegisterUserUseCase(repository, encrypter, generator);
     const result = await  useCase.execute({ name: body.name, email: body.email, password: body.password });
-    
     return result;
   }
 }

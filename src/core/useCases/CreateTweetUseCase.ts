@@ -2,6 +2,8 @@ import { ITweet } from "../../infra/repositories/protocols/ITweet";
 import { Tweet } from "../entities/Tweet";
 import { ITweetRepository } from "../repositories/ITweetRepository";
 import { IUuid } from "../protocols/IUuid";
+import { IUsersRepository } from "../repositories/IUserRepository";
+import { IUser } from "../../infra/repositories/protocols/IUser";
 
 interface ICreateTweet {
   //id: string;
@@ -13,14 +15,16 @@ interface ICreateTweet {
 export class CreateTweetUseCase{
   tweetRepository: ITweetRepository<ITweet>
   generator: IUuid
+  userRepository: IUsersRepository<IUser>
 
-  constructor(tweetRepository: ITweetRepository<ITweet>, generator: IUuid){
+  constructor(tweetRepository: ITweetRepository<ITweet>, generator: IUuid, userRepository: IUsersRepository<IUser>){
     this.tweetRepository = tweetRepository;
     this.generator = generator;
+    this.userRepository = userRepository;
   }
 
   async create({userId, text}: ICreateTweet){
-    const user = await this.tweetRepository.findById(userId);
+    const user = await this.userRepository.findByUserId(userId);
 
     if(!user)
       throw new Error("User not found.");

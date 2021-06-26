@@ -12,7 +12,17 @@ export class TweetMemoryRepository{
   async save(tweet: ITweet): Promise<void>{
     tweets.push(tweet);
     tweets.forEach(value => {
-      console.log("Tweet: ", value.id, "Tweet User: ", value.userId);
+      console.log("Tweet: ", value.text, "Tweet User: ", value.userId);
     })
+  }
+
+  async listTweets(userId: string): Promise<ITweet[]>{
+    let tweetsUser:ITweet[] = [];
+    tweets.forEach(value => {
+      if(value.userId === userId)
+        tweetsUser.push(value);
+    })
+
+    return tweetsUser;
   }
 }
