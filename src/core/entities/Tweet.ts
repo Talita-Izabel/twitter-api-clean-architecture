@@ -7,6 +7,7 @@ export class Tweet{
   userId: string;
   text: string;
   date: Date;
+  likes: number;
   //user: User;
 
   constructor(id:string, userId:string, text:string, date:Date){

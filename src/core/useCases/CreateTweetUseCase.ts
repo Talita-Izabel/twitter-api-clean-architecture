@@ -9,6 +9,7 @@ interface ICreateTweet {
   //id: string;
   userId: string;
   text: string;
+  //likes: number;
   //date: Date;
 }
 
@@ -32,6 +33,7 @@ export class CreateTweetUseCase{
     const date = new Date();
     const id = this.generator.idGenerator();
     const tweet = new Tweet(id, userId, text, date);
+    tweet.likes = 0;
     /*tweet.id = this.generator.idGenerator();
     tweet.date = new Date();*/
 

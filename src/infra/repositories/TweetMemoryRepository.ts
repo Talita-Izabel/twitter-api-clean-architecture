@@ -1,6 +1,6 @@
 import { ITweet } from "./protocols/ITweet";
 
-const tweets:ITweet[] = [];
+let tweets:ITweet[] = [];
 
 export class TweetMemoryRepository{
   async findById(tweetId: string): Promise<ITweet>{
@@ -24,5 +24,28 @@ export class TweetMemoryRepository{
     })
 
     return tweetsUser;
+  }
+
+  async deleteTweet( tweet: ITweet ): Promise<ITweet[]>{
+    tweets = tweets.filter( tweetValue => {
+      return tweetValue.id !== tweet.id ;
+    })
+
+    return tweets;
+  }
+
+  async alterTweet( tweet: ITweet, text: string ): Promise<ITweet[]>{
+    tweets.forEach( value => {
+      if(value.id === tweet.id)
+        value.text = text;
+    });
+
+    return tweets;
+  }
+
+  async likeTweet( tweet: ITweet ): Promise<ITweet>{
+    tweet.likes += 1;
+
+    return tweet;
   }
 }

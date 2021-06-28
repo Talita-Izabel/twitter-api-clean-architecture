@@ -3,4 +3,5 @@ export interface ITweet{
   userId: string;
   text: string;
   date: Date;
+  likes: number;
 }

@@ -20,17 +20,32 @@ export class TweetMessageMemoryRepository{
     })
   }
 
-  async deleteComment( tweetComment: ITweetMessage):Promise<void>{
+  async deleteComment( tweetComment: ITweetMessage):Promise<ITweetMessage[]>{
     tweetsMessage = tweetsMessage.filter( tweet => {
       return tweet.id !== tweetComment.id;
     })
+
+    return tweetsMessage;
   }
 
-  async alterComment( tweetComment: ITweetMessage, text: string  ): Promise<void>{
+  async alterComment( tweetComment: ITweetMessage, text: string  ): Promise<ITweetMessage[]>{
     tweetsMessage.forEach(value => {
       if(value.id === tweetComment.id){
         value.text = text;
       }
     })
+
+    return tweetsMessage;
+  }
+
+  async listComments( tweetId: string ): Promise<ITweetMessage[]>{
+    let tweetsMessageUser:ITweetMessage[] = [];
+
+    tweetsMessage.forEach(value => {
+      if(value.tweetId === tweetId)
+        tweetsMessageUser.push(value);
+    })
+
+    return tweetsMessageUser;
   }
 }

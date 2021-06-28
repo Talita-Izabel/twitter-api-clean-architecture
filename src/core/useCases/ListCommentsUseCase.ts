@@ -34,6 +34,8 @@ export class ListCommentsUseCase{
     if(tweet.userId != userId)
       throw new Error("Tweet does not belong to this user.");
 
-    await this.tweetMessageRepository.listComments(tweetId);
+    const comments =  await this.tweetMessageRepository.listComments(tweetId);
+
+    return comments;
   }
 }
