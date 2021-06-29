@@ -18,6 +18,26 @@ app.use(express.json());
 
 app.use('/docs', express.static('./docs'));
 
+/**
+ * @apiVersion 0.0.1
+ * @api {post} /auth/register Registrar Usuário
+ * @apiName Register
+ * @apiGroup Auth
+ * @apiBody { String } name Nome do usuário
+ * @apiBody { String } email E-mail do usuário
+ * @apiBody { String } password Senha do usuário
+ * 
+ * @apiSuccess { Object } result Dados do usuário
+ * @apiSuccessExample Successful Response:
+ * HTTP/1.1 200 OK
+ * 
+ * {
+ *    "id": "ca6e1c38-dd53-45f2-93ea-f4256d039988",
+ *    "name": "Izabel",
+ *    "email": "iza@gmail.com",
+ *    "password": "$2b$10$2UNE7mg2cIBIECNqI1.Mh./EAX.eDfzDTHYkrzbOpR9O41MIc6/g6"
+ * }
+ */
 app.post('/auth/register', ExpressAdapter.call(RegisterUserController.registerUser));
 app.post('/auth/login', ExpressAdapter.call(LoginUserController.loginUser));
 
