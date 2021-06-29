@@ -4,7 +4,6 @@ import { IUser } from "./protocols/IUser";
 const users:IUser[] = [];
 
 export class UserMemoryRepository implements IUsersRepository<IUser>{
-  //users: User[] = [];
 
   async findByEmail(email: string): Promise<IUser>{
     const user = users.find(user => user.email === email);

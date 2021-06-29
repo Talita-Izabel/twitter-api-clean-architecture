@@ -37,8 +37,25 @@ app.use('/docs', express.static('./docs'));
  *    "email": "iza@gmail.com",
  *    "password": "$2b$10$2UNE7mg2cIBIECNqI1.Mh./EAX.eDfzDTHYkrzbOpR9O41MIc6/g6"
  * }
+ * 
+ * @apiError UserExists Usuário já cadastrado.
+ * 
+ * @apiErrorExample Error:
+ * HTTP/1.1 400 Bad Request
+ * {
+ *  error: "User already existis!"
+ * }
  */
 app.post('/auth/register', ExpressAdapter.call(RegisterUserController.registerUser));
+
+
+/**
+ * @apiVersion 0.0.1
+ * @api {post} /auth/login Autenticar Usuário
+ * @apiName Login
+ * @apiGroup Auth
+ *  
+ */
 app.post('/auth/login', ExpressAdapter.call(LoginUserController.loginUser));
 
 //Cria um Tweet
